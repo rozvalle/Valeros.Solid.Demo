@@ -14,5 +14,6 @@ namespace Valeros.Solid.Demo
 		Student GetStudent(int id);
 		List<Student> GetAllStudents();
 	}
+}
 
 

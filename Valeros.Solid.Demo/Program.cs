@@ -6,67 +6,6 @@ using System.Threading.Tasks;
 
 namespace Valeros.Solid.Demo
 {
-	// Interface for CRUD operations (ISP - Interface Segregation Principle)
-	public interface IStudentRepository
-	{
-		void AddStudent(Student student);
-		void UpdateStudent(int id, Student student);
-		void DeleteStudent(int id);
-		Student GetStudent(int id);
-		List<Student> GetAllStudents();
-	}
-
-	// Single Responsibility Principle (SRP) - Student class
-	public class Student
-	{
-		public int Id { get; set; }
-		public string FirstName { get; set; }
-		public string LastName { get; set; }
-		public string MiddleName { get; set; }
-		public string Course { get; set; }
-		public int YearLevel { get; set; }
-	}
-
-	// Open/Closed Principle (OCP) - Repository implementation can be extended
-	public class StudentRepository : IStudentRepository
-	{
-		private readonly List<Student> _students = new List<Student>();
-
-		public void AddStudent(Student student)
-		{
-			_students.Add(student);
-		}
-
-		public void UpdateStudent(int id, Student student)
-		{
-			var existingStudent = GetStudent(id);
-			if (existingStudent != null)
-			{
-				existingStudent.FirstName = student.FirstName;
-				existingStudent.LastName = student.LastName;
-				existingStudent.MiddleName = student.MiddleName;
-				existingStudent.Course = student.Course;
-				existingStudent.YearLevel = student.YearLevel;
-			}
-		}
-
-		public void DeleteStudent(int id)
-		{
-			_students.RemoveAll(s => s.Id == id);
-		}
-
-		public Student GetStudent(int id)
-		{
-			return _students.Find(s => s.Id == id);
-		}
-
-		public List<Student> GetAllStudents()
-		{
-			return _students;
-		}
-	}
-
-	// Dependency Inversion Principle (DIP) - Depend on abstractions
 	class Program
 	{
 		static void Main()
